@@ -1,17 +1,23 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
-import { notifications, triggerNotification } from '@/stores/notificationsStore'
-import { currentOpenModalProps, currentOpenModal, showModal } from '@/stores/modalStore'
+import { notifications } from '@/stores/notificationsStore'
+import { currentOpenModalProps, currentOpenModal } from '@/stores/modalStore'
 import Notification from '@/components/notifications/Notification.vue'
-import MissingApiKeyInLocalStorageModal from '@/components/modals/MissingApiKeyInLocalStorageModal.vue';
 import { RouterView } from 'vue-router';
-import { EnumTypeNotification } from './model/Notification';
-
-onMounted(() => {
-  triggerNotification('error', "nrcbfcbrcbfcfycehdheudh ehduehd eud edihjeiudhe dedeuh f", EnumTypeNotification.ERROR)
-  triggerNotification('attention', "nrcbfcbrcbfcfycehdheudh ehduehd eud edihjeiudhe dedeuh f", EnumTypeNotification.WARNING)
-  triggerNotification('cool', "nrcbfcbrcbfcfycehdheudh ehduehd eud edihjeiudhe dedeuh f", EnumTypeNotification.INFO)
-  showModal(MissingApiKeyInLocalStorageModal, { apiKeyName: 'GEMINI_API_KEY' })
+import { getCustomers } from './services/shifterApiService';
+import { addCustomers } from '@/dexie/customers'
+import {getLastSyncDate, updateSynchro} from '@/dexie/synchro'
+onMounted(async () => {
+  // triggerNotification('error', "nrcbfcbrcbfcfycehdheudh ehduehd eud edihjeiudhe dedeuh f", EnumTypeNotification.ERROR)
+  // triggerNotification('attention', "nrcbfcbrcbfcfycehdheudh ehduehd eud edihjeiudhe dedeuh f", EnumTypeNotification.WARNING)
+  // triggerNotification('cool', "nrcbfcbrcbfcfycehdheudh ehduehd eud edihjeiudhe dedeuh f", EnumTypeNotification.INFO)
+  // showModal(MissingApiKeyInLocalStorageModal, { apiKeyName: 'GEMINI_API_KEY' })
+  const lastSynchro = await getLastSyncDate('customers')
+  const customersUpdates = await getCustomers(lastSynchro?.lastSyncDate)
+  if(customersUpdates?.length) {
+    await addCustomers(customersUpdates) 
+    await updateSynchro('customers', lastSynchro) 
+  }
 })
 </script>
 

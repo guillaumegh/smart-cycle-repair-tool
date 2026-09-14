@@ -11,6 +11,16 @@ export default defineConfig({
     devOptions: {
       enabled: true
     },
+    workbox: {
+      globPatterns: ['**/*.{js,css,html,ts,ico,png,svg,woff2}'],
+      navigateFallbackDenylist: [/^\/api/],
+      runtimeCaching: [
+        {
+          urlPattern: /^\/api\/.*$/,
+          handler: 'NetworkOnly'
+        }
+      ]
+    },
     manifest: {
       name: 'Smart Cycle Repair Tool',
       short_name: 'CycleRepair',

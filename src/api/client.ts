@@ -21,6 +21,7 @@ class StandardBearerStrategy implements IApiKeyStrategy {
 class ApiKeyStrategyEngine {
   private readonly strategies: Record<string, IApiKeyStrategy> = {
     'GEMINI': new GeminiApiKeyStrategy(),
+    'SHIFTER' : new StandardBearerStrategy(),
   };
   addKey(config: InternalAxiosRequestConfig, apikey: string, apiName: string) {
     const strategy = this.strategies[apiName] || new StandardBearerStrategy();
@@ -30,10 +31,17 @@ class ApiKeyStrategyEngine {
   }
 }
 const getApiKey = (apiName: string) => {
-  return localStorage.getItem(apiName + '_API_KEYZ') ?? undefined
+  return localStorage.getItem(apiName + '_API_KEY') ?? undefined
 }
 
 export const geminiApi = axios.create({
+  baseURL: import.meta.env.VITE_GEMINI_LITE_API_BASE_URL,
+  timeout: 30000,
+  headers: {
+    'Content-Type': 'application/json',
+  }
+});
+export const shifterApi = axios.create({
   baseURL: import.meta.env.VITE_GEMINI_LITE_API_BASE_URL,
   timeout: 30000,
   headers: {
@@ -101,3 +109,4 @@ const setupInterceptors = (instance: AxiosInstance, apiName = 'DEFAULT') => {
 };
 
 setupInterceptors(geminiApi, 'GEMINI');
+setupInterceptors(shifterApi, 'SHIFTER');

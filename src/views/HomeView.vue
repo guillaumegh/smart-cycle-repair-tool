@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import BaseView from './BaseView.vue';
+
 </script>
 <template>
-  HOME
+  <BaseView>
+  </BaseView>
 </template>

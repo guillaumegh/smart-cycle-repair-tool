@@ -81,9 +81,9 @@ body {
 /* --- 1. Espacement des blocs --- */
 .form-group {
   display: flex;
-  flex-direction: column;
   gap: 6px;
   margin-bottom: 16px;
+  align-items: center;
 }
 
 /* --- 2. Le Label (Texte explicatif) --- */

@@ -11,8 +11,11 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^7.3.1",
     "@mdi/font": "^7.4.47",
+    "@vueuse/rxjs": "^14.4.0",
     "axios": "^1.20.0",
+    "axios-mock-adapter": "^2.1.0",
     "buefy": "^3.1.0",
+    "dexie": "^4.4.6",
     "uuid": "^14.0.2",
     "vue": "^3.5.41",
     "vue-router": "^5.3.1"
