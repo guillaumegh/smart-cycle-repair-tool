@@ -39,8 +39,8 @@ const saveData = async () => {
         <div class="form-group" >
           <label for="phoneNumber">Numéro de téléphone</label>
           <input type="tel" name="phoneNumber" id="phoneNumber" v-model="customer.phoneNumber"  :disabled="!editing" />
-          <a href="`tel:${customer.phoneNumber}`"><i class="fa-solid fa-phone"></i></a>
-          <a href="`sms:${encodeURIComponent(customer.phoneNumber)}`"><i class="fa-solid fa-sms"></i></a>
+          <a href="`tel:${customer.phoneNumber}`" rel="external"><i class="fa-solid fa-phone"></i></a>
+          <a href="`sms:${customer.phoneNumber)`" rel="external"><i class="fa-solid fa-sms"></i></a>
         </div>
         <div class="form-group" >
           <label for="address">Adresse</label>
