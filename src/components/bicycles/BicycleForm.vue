@@ -14,8 +14,8 @@ const saveData = async () => {
 }
 </script>
 <template>
-  <div class="flex-row space-between gap-20">
-    <div class="stretch">
+  <div class="flex-row space-between gap-20" style="flex-wrap: wrap; ">
+    <div class="stretch" style="flex-basis: 400px;">
       <form id="bicycle-form" @submit.prevent="saveData">
         <div class="flex-column">
           <div class="flex-row space-between" style="margin-bottom: 10px;">
