@@ -42,6 +42,14 @@ export const router = createRouter({
   history: createMemoryHistory(),
   routes,
 })
+// router.beforeEach((to) => {
+//   const targetPath = to.fullPath.toLowerCase()
+//   if(targetPath.startsWith('tel') || targetPath.startsWith('sms')) {
+//     window.location.href = to.fullPath
+//     return false
+//   }
+//   return true
+// })
 app.use(router)
 app.use(Buefy)
 app.mount('#app')
