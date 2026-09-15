@@ -42,6 +42,10 @@ body {
   display: flex;
   flex-direction: row;
 }
+.flex-left {
+  display: flex;
+  justify-content: left;
+}
 .flex-column {
   display: flex;
   flex-direction: column;
