@@ -15,5 +15,15 @@ export const addCustomers = async (customers: Array<Customer>) => {
   });
 }
 export const getCustomerById = async (id: string) => {
-  return db.customers.where('id').equals(id).first()
+  const customer = await db.customers.where('id').equals(id).first()
+  if(!customer) {
+    throw new Error(`Impossible de charger le client avec l'ID ${id}`)
+  }
+  return customer
+}
+export const updateCustomer = async (customer: Customer) => {
+  const customerCopy = {...customer} as any
+  delete customerCopy.id
+  await db.customers.update(customer.id, customerCopy);
+  triggerNotification('Mise à jour d\'une fiche client', `La fiche de ${customer.firstname} ${customer.lastname} a été mise à jour`, EnumTypeNotification.INFO)
 }

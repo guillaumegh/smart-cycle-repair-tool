@@ -10,8 +10,9 @@ const columns = [
   {property: 'firstname', label: 'Prénom'},
   {property: 'lastname', label: 'Nom de famille'},
   {property: 'address', label: 'Adresse'},
-  {property: 'birthdate', label: 'Date de naissance'},
-  {property: 'registrationDate', label: 'Date de d\'enregistrement'},
+  {property: 'phoneNumber', label: 'Téléphone'},
+  {property: 'email', label: 'Email'},
+  {property: 'registrationDate', label: 'Date d\'enregistrement'},
   {property: '', label: ''},
 ]
 const customers = useObservable(liveQuery(() => db.customers.toArray()) as any)
@@ -22,7 +23,8 @@ const customers = useObservable(liveQuery(() => db.customers.toArray()) as any)
       <table-column :column="{property: 'firstname', label: 'Prénom'}" :row="row" ></table-column>
       <table-column :column="{property: 'lastname', label: 'Nom de famille'}" :row="row"></table-column>
       <table-column :column="{property: 'address', label: 'Adresse'}" :row="row"></table-column>
-      <table-column :column="{property: 'birthdate', label: 'Date de naissance'}" :row="row">{{ row.birthdate.toLocaleDateString("fr") }}</table-column>
+      <table-column :column="{property: 'phoneNumber', label: 'Téléphone'}" :row="row"></table-column>
+      <table-column :column="{property: 'email', label: 'Email'}" :row="row"></table-column>
       <table-column :column="{property: 'registrationDate', label: 'Date d\'enregistrement'}" :row="row">{{ row.registrationDate.toLocaleDateString("fr") }}</table-column>
       <table-column :row="row">
         <RouterLink :to="{ name: 'customer-detail', params: { id: row.id } } " class="nav-item">

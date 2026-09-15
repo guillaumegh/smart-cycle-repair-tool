@@ -1,13 +1,15 @@
 <script setup lang="ts">
-import { getCustomerById } from '@/dexie/customers';
-import { onMounted, ref } from 'vue';
+import CustomerForm from '@/components/customers/CustomerForm.vue'
 
-const props = defineProps<{id: string}>()
-const customer = ref()
-onMounted(async () => {
-  customer.value = await getCustomerById(props.id)
-})
+defineProps<{id: string}>()
 </script>
 <template>
-  <div><pre>{{ customer }}</pre></div>
+  <Suspense>
+    <template #default>
+      <CustomerForm :customerId="id" />
+    </template>
+    <template #fallback>
+      <div>Chargement...</div>
+    </template>
+  </Suspense>
 </template>

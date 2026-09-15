@@ -2,7 +2,8 @@ export interface ICustomerDTO {
   id: string
   firstname: string
   lastname: string
-  birthdate: string
+  phoneNumber: string
+  email: string
   address: string
   registrationDate: string
 }

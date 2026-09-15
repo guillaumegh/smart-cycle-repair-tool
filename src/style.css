@@ -93,12 +93,14 @@ body {
   color: #475569; /* Gris ardoise doux */
   text-transform: uppercase;
   letter-spacing: 0.03em;
+  text-align: left;
 }
 
 /* --- 3. Les Règles Communes aux Champs (Input, Select, Textarea) --- */
 .form-group input[type="text"],
 .form-group input[type="number"],
 .form-group input[type="email"],
+.form-group input[type="tel"],
 .form-group select,
 .form-group textarea {
   width: 100%;
