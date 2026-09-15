@@ -3,7 +3,7 @@ import { getCustomerById, updateCustomer } from '@/dexie/customers';
 import type { Customer } from '@/model/customers/Customer';
 import { ref } from 'vue';
 
-const props = defineProps<{customerId: string}>()
+const props = defineProps<{customerId: string, editable: boolean}>()
 const customer = ref<Customer>(await getCustomerById(props.customerId))
 const editing = ref(false)
 const navigate = () => {
@@ -21,8 +21,8 @@ const saveData = async () => {
     <form id="customer-form" @submit.prevent="saveData">
       <div class="flex-column">
         <div class="flex-row space-between" style="margin-bottom: 10px;">
-          <p class="flex space-between">Enregistré depuis le {{ customer.registrationDate.toLocaleDateString('fr') }}</p>
-          <p><i class="fa-solid fa-edit" @click.prevent="editing=true"></i></p>
+          <p class="flex space-between">Enregistré depuis le {{ customer.changeDate.toLocaleDateString('fr') }}</p>
+          <p v-if="editable"><i class="fa-solid fa-edit" @click.prevent="editing=true"></i></p>
         </div>
         <div class="form-group" >
           <label for="firstname">Prénom</label>

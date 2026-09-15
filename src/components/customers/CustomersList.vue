@@ -12,7 +12,7 @@ const columns = [
   {property: 'address', label: 'Adresse'},
   {property: 'phoneNumber', label: 'Téléphone'},
   {property: 'email', label: 'Email'},
-  {property: 'registrationDate', label: 'Date d\'enregistrement'},
+  {property: 'changeDate', label: 'Date d\'enregistrement'},
   {property: '', label: ''},
 ]
 const customers = useObservable(liveQuery(() => db.customers.toArray()) as any)
@@ -25,7 +25,7 @@ const customers = useObservable(liveQuery(() => db.customers.toArray()) as any)
       <table-column :column="{property: 'address', label: 'Adresse'}" :row="row"></table-column>
       <table-column :column="{property: 'phoneNumber', label: 'Téléphone'}" :row="row"></table-column>
       <table-column :column="{property: 'email', label: 'Email'}" :row="row"></table-column>
-      <table-column :column="{property: 'registrationDate', label: 'Date d\'enregistrement'}" :row="row">{{ row.registrationDate.toLocaleDateString("fr") }}</table-column>
+      <table-column :column="{property: 'changeDate', label: 'Date d\'enregistrement'}" :row="row">{{ row.changeDate.toLocaleDateString("fr") }}</table-column>
       <table-column :row="row">
         <RouterLink :to="{ name: 'customer-detail', params: { id: row.id } } " class="nav-item">
           <span><i class="fa-solid fa-circle-user"></i></span>

@@ -5,5 +5,5 @@ export interface ICustomerDTO {
   phoneNumber: string
   email: string
   address: string
-  registrationDate: string
+  changeDate: string
 }

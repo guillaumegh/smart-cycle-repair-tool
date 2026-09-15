@@ -1,3 +1,5 @@
+import { Bicycle } from "@/model/bicycles/Bicycle";
+import type { IBicycleDTO } from "@/model/bicycles/IBicycleDTO";
 import { Customer } from "@/model/customers/Customer";
 import type { ICustomerDTO } from "@/model/customers/ICustomerDTO";
 import axios from "axios";
@@ -7,7 +9,16 @@ export const getCustomers = async (lastSyncDate?: Date): Promise<Array<Customer>
   .then((response) => {
     const data = response.data.map(c => new Customer(c))
     if(!lastSyncDate) return data
-    return data.filter(c => c.registrationDate > lastSyncDate)
+    return data.filter(c => c.changeDate > lastSyncDate)
+  })
+}
+
+export const getBicycles = async (lastSyncDate?: Date): Promise<Array<Bicycle>> => {
+  return axios.get<Array<IBicycleDTO>>("/api/bicycles")
+  .then((response) => {
+    const data = response.data.map(b => new Bicycle(b))
+    if(!lastSyncDate) return data
+    return data.filter(c => c.changeDate > lastSyncDate)
   })
 }
 

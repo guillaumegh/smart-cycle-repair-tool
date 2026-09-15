@@ -49,6 +49,12 @@ body {
 .space-between{
   justify-content: space-between;
 }
+.stretch {
+  flex: 1
+}
+.gap-20 {
+  gap: 20px;
+}
 .btn {
   padding: 10px 20px;
   border-radius: 6px;

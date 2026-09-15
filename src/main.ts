@@ -16,12 +16,14 @@ import BikeInfosView from '@/views/BikeInfosView.vue'
 import EstimateView from '@/views/EstimateView.vue'
 import CustomersList from '@/components/customers/CustomersList.vue'
 import CustomerDetail from '@/components/customers/CustomerDetail.vue'
+import BicyclesList from '@/components/bicycles/BicyclesList.vue'
+import BicycleDetail from '@/components/bicycles/BicycleDetail.vue'
 
 import { createMemoryHistory, createRouter } from 'vue-router'
 
 const routes = [
   { path: '/', component: HomeView },
-  { path: '/customer-infos', component: CustomerInfosView,children: [
+  { path: '/customer-infos', component: CustomerInfosView, children: [
     {
       path: '',
       name: 'customer-list',
@@ -34,7 +36,19 @@ const routes = [
       props: true
     }
   ] },
-  { path: '/bike-infos', component: BikeInfosView},
+  { path: '/bike-infos', component: BikeInfosView, children: [
+    {
+      path: '',
+      name: 'bicycle-list',
+      component: BicyclesList
+    },
+    {
+      path: '/:id',
+      name: 'bicycle-detail',
+      component: BicycleDetail,
+      props: true
+    }
+  ] },
   { path: '/estimate', component: EstimateView}
 ]
 
@@ -42,14 +56,7 @@ export const router = createRouter({
   history: createMemoryHistory(),
   routes,
 })
-// router.beforeEach((to) => {
-//   const targetPath = to.fullPath.toLowerCase()
-//   if(targetPath.startsWith('tel') || targetPath.startsWith('sms')) {
-//     window.location.href = to.fullPath
-//     return false
-//   }
-//   return true
-// })
+
 app.use(router)
 app.use(Buefy)
 app.mount('#app')

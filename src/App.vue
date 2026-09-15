@@ -4,19 +4,27 @@ import { notifications } from '@/stores/notificationsStore'
 import { currentOpenModalProps, currentOpenModal } from '@/stores/modalStore'
 import Notification from '@/components/notifications/Notification.vue'
 import { RouterView } from 'vue-router';
-import { getCustomers } from './services/shifterApiService';
+import { getBicycles, getCustomers } from './services/shifterApiService';
 import { addCustomers } from '@/dexie/customers'
 import {getLastSyncDate, updateSynchro} from '@/dexie/synchro'
+import { addBicycles } from './dexie/bicycles';
 onMounted(async () => {
   // triggerNotification('error', "nrcbfcbrcbfcfycehdheudh ehduehd eud edihjeiudhe dedeuh f", EnumTypeNotification.ERROR)
   // triggerNotification('attention', "nrcbfcbrcbfcfycehdheudh ehduehd eud edihjeiudhe dedeuh f", EnumTypeNotification.WARNING)
   // triggerNotification('cool', "nrcbfcbrcbfcfycehdheudh ehduehd eud edihjeiudhe dedeuh f", EnumTypeNotification.INFO)
   // showModal(MissingApiKeyInLocalStorageModal, { apiKeyName: 'GEMINI_API_KEY' })
-  const lastSynchro = await getLastSyncDate('customers')
-  const customersUpdates = await getCustomers(lastSynchro?.lastSyncDate)
+  const lastCustomerSynchro = await getLastSyncDate('customers')
+  const customersUpdates = await getCustomers(lastCustomerSynchro?.lastSyncDate)
   if(customersUpdates?.length) {
     await addCustomers(customersUpdates) 
-    await updateSynchro('customers', lastSynchro) 
+    await updateSynchro('customers', lastCustomerSynchro) 
+  }
+  const lastBicyclesSynchro = await getLastSyncDate('bicycles')
+
+  const bicyclesUpdates = await getBicycles(lastBicyclesSynchro?.lastSyncDate)
+  if(bicyclesUpdates?.length) {
+    await addBicycles(bicyclesUpdates) 
+    await updateSynchro('bicycles', lastBicyclesSynchro) 
   }
 })
 </script>

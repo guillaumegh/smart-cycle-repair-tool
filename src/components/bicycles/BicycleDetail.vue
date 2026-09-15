@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import CustomerForm from '@/components/customers/CustomerForm.vue'
+import BicycleForm from '@/components/bicycles/BicycleForm.vue'
 
 defineProps<{id: string}>()
 </script>
 <template>
   <Suspense>
     <template #default>
-      <CustomerForm :customerId="id" :editable="true"/>
+      <BicycleForm :bicycleId="id" />
     </template>
     <template #fallback>
       <div>Chargement...</div>
